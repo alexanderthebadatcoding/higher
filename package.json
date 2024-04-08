@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "frog": "latest",
+    "fsevents": "^2.3.3",
     "hono": "^4"
   },
   "devDependencies": {
