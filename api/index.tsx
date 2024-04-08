@@ -62,29 +62,15 @@ app.frame("/", (c) => {
   });
 });
 
-async function fetchRandomPhoto() {
-  try {
-    const response = await fetch("https://source.unsplash.com/random/1200x630");
-    if (!response.ok) {
-      throw new Error("Failed to fetch image");
-    }
-    const imageUrl = response.url;
-    console.log(imageUrl);
-    return imageUrl.toString();
-  } catch (error) {
-    console.error("Error fetching image:", error);
-    return null;
-  }
-}
-
 app.frame("/higher", async (c) => {
-  // const bgImage = fetchRandomPhoto();
+  const randomInt = Math.floor(Math.random() * 100);
+  const imageUrlBase = `https://picsum.photos/seed/${randomInt}/1200/630`;
   return c.res({
     image: (
       <div
         style={{
           alignItems: "center",
-          backgroundImage: "url(https://source.unsplash.com/random/1200x630)",
+          backgroundImage: `url(${imageUrlBase})`,
           display: "flex",
           flexDirection: "column",
           flexWrap: "nowrap",
@@ -113,7 +99,9 @@ app.frame("/higher", async (c) => {
       <Button value="back" action="/">
         Back
       </Button>,
-      <Button.Link href="/higher?accept=text/html">View Image</Button.Link>,
+      <Button.Link href="https://higher-nine.vercel.app/api/higher?accept=text/html">
+        View Image
+      </Button.Link>,
     ],
   });
 });
